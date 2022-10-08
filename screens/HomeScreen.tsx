@@ -11,14 +11,14 @@ export default function HomeScreen({
   return (
     <ScrollView>
       <View style={styles.container}>
-        <View style={{ backgroundColor: "pink", flex: 1 }}>
+        <View style={styles.pin}>
           {pins
             .filter((_, index) => index % 2 === 0)
             .map((pin) => (
               <Pin pin={pin} key={pin.id} />
             ))}
         </View>
-        <View style={{ backgroundColor: "green", flex: 1 }}>
+        <View style={styles.pin}>
           {pins
             .filter((_, index) => index % 2 !== 0)
             .map((pin) => (
@@ -34,5 +34,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     padding: 10,
+  },
+  pin: {
+    flex: 1,
   },
 });

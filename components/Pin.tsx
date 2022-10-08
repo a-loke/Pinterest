@@ -24,7 +24,9 @@ const Pin = (props: { pin: { title: any; image: any } }) => {
           <Entypo name="heart-outlined" size={18} color="black" />
         </Pressable>
       </View>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title} numberOfLines={2}>
+        {title}
+      </Text>
     </View>
   );
 };
@@ -34,15 +36,18 @@ export default Pin;
 const styles = StyleSheet.create({
   pin: {
     width: "100%",
+    padding: 4,
   },
   title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    margin: 10,
+    fontSize: 16,
+    fontWeight: "600",
+    margin: 5,
+    lineHeight: 22,
+    color: "#181818",
   },
   image: {
     width: "100%",
-    borderRadius: 25,
+    borderRadius: 15,
   },
   likeButton: {
     position: "absolute",
