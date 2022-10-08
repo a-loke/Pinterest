@@ -3,16 +3,22 @@ import { Entypo } from "@expo/vector-icons";
 
 import { Text, View } from "../components/Themed";
 import { useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 const Pin = (props: { pin: { title: any; image: any } }) => {
   const { title, image } = props.pin;
   const [ratio, setRatio] = useState(0.5);
+  const navigation = useNavigation();
 
   useEffect(() => {
     Image.getSize(image, (width, height) => setRatio(width / height));
   }, []);
+
+  const goToPinScreen = () => {
+    navigation.navigate("Pin", { title, image });
+  };
   return (
-    <View style={styles.pin}>
+    <Pressable onPress={goToPinScreen} style={styles.pin}>
       <View>
         <Image
           source={{
@@ -27,7 +33,7 @@ const Pin = (props: { pin: { title: any; image: any } }) => {
       <Text style={styles.title} numberOfLines={2}>
         {title}
       </Text>
-    </View>
+    </Pressable>
   );
 };
 
