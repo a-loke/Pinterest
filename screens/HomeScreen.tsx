@@ -1,4 +1,5 @@
 import { ScrollView, StyleSheet } from "react-native";
+import pins from "../assets/data/pins";
 import Pin from "../components/Pin";
 
 import { View } from "../components/Themed";
@@ -10,34 +11,20 @@ export default function HomeScreen({
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Pin
-          pin={{
-            title: "Title 1",
-            image:
-              "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/pinterest/0.jpeg",
-          }}
-        />
-        <Pin
-          pin={{
-            title: "Title 2",
-            image:
-              "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/pinterest/1.jpeg",
-          }}
-        />
-        <Pin
-          pin={{
-            title: "Title 3",
-            image:
-              "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/pinterest/2.jpeg",
-          }}
-        />
-        <Pin
-          pin={{
-            title: "Title 4",
-            image:
-              "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/pinterest/3.jpeg",
-          }}
-        />
+        <View style={{ backgroundColor: "pink", flex: 1 }}>
+          {pins
+            .filter((_, index) => index % 2 === 0)
+            .map((pin) => (
+              <Pin pin={pin} key={pin.id} />
+            ))}
+        </View>
+        <View style={{ backgroundColor: "green", flex: 1 }}>
+          {pins
+            .filter((_, index) => index % 2 !== 0)
+            .map((pin) => (
+              <Pin pin={pin} key={pin.id} />
+            ))}
+        </View>
       </View>
     </ScrollView>
   );
@@ -45,9 +32,7 @@ export default function HomeScreen({
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: "row",
     padding: 10,
   },
 });
