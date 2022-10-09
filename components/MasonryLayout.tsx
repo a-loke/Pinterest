@@ -1,4 +1,9 @@
-import { ScrollView, StyleSheet } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+} from "react-native";
 import Pin from "../components/Pin";
 
 import { View } from "../components/Themed";
@@ -11,23 +16,21 @@ interface IMasonryList {
   }[];
 }
 export default function MasonryLayout({ pins }: IMasonryList) {
+  const width = useWindowDimensions().width;
+  const numRows = Math.ceil(width / 300);
+
   return (
     <ScrollView>
       <View style={styles.container}>
-        <View style={styles.pin}>
-          {pins
-            .filter((_, index) => index % 2 === 0)
-            .map((pin) => (
-              <Pin pin={pin} key={pin.id} />
-            ))}
-        </View>
-        <View style={styles.pin}>
-          {pins
-            .filter((_, index) => index % 2 !== 0)
-            .map((pin) => (
-              <Pin pin={pin} key={pin.id} />
-            ))}
-        </View>
+        {Array.from(Array(numRows)).map((_, colIndex) => (
+          <View style={styles.pin}>
+            {pins
+              .filter((_, index) => index % numRows === colIndex)
+              .map((pin) => (
+                <Pin pin={pin} key={pin.id} />
+              ))}
+          </View>
+        ))}
       </View>
     </ScrollView>
   );
