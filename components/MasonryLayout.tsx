@@ -23,7 +23,7 @@ export default function MasonryLayout({ pins }: IMasonryList) {
     <ScrollView>
       <View style={styles.container}>
         {Array.from(Array(numRows)).map((_, colIndex) => (
-          <View style={styles.pin}>
+          <View style={styles.pin} key={colIndex}>
             {pins
               .filter((_, index) => index % numRows === colIndex)
               .map((pin) => (
